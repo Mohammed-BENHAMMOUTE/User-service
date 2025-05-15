@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: user-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+            issuer-uri: http://keycloak.192.168.39.31.nip.io/realms/master
+            jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
+            # JSON Web Key Set (JWKS) URI that contains the public keys needed to verify the JWT signature.
+            # A jwk is a json representation of a cryptographic keys needed to verify the JWT signature, meaning it was issued by the issuer Keycloak.
+            # The issuer URI is the base URL of the Keycloak server, and the jwk-set-uri is the path to the JWKS endpoint.
+  server:
+    port: 8081
