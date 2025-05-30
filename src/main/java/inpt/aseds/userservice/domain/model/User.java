@@ -1,20 +1,20 @@
-package inpt.aseds.userservice.model;
-
-
+package inpt.aseds.userservice.domain.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @Entity
-@Table(name = "user_profile")
+@Table(name = "user_table")
 @Getter @Setter
-public class UserProfile {
+public class User{
     @Id
-    private String id;
+    private Long id;
+
+    @Column(name = "username", nullable = false , length = 100)
+    private String username;
 
     @Column(length = 500)
     private String bio;
@@ -25,15 +25,7 @@ public class UserProfile {
     @Column(name = "channel_id")
     private String channelId;
 
-    @Column(name = "display_name")
-    private String displayName;
 
-
-    @ElementCollection
-    @CollectionTable(name  = "user_social_links" , joinColumns = @JoinColumn(name = "user_id"))
-    @MapKeyColumn(name = "platform")
-    @Column(name = "link")
-    private Map<String, String> socialLinks = new HashMap<>();
 
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
@@ -42,6 +34,10 @@ public class UserProfile {
     @Column(name = "updated_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+
+    @Column(name = "is_active")
+    private boolean isActive = true;
 
     @PrePersist
     protected void onCreate() {

@@ -1,0 +1,116 @@
+syntax = "proto3";
+
+package inpt.aseds.userservice;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+option java_multiple_files = true;
+
+option java_package = "inpt.aseds.userservice.infrastructure.grpc";
+option java_outer_classname = "UserServiceProto";
+
+// User message representing a user entity
+message User {
+  int64 id = 1;
+  string username = 2;
+  string bio = 3;
+  string avatar_url = 4;
+  string channel_id = 5;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp updated_at = 8;
+  bool is_active = 9;
+}
+
+// Request to get a user by ID
+message GetUserRequest {
+  int64 id = 1;
+}
+
+// Request to get a user by username
+message GetUserByUsernameRequest {
+  string username = 1;
+}
+
+message deactivateUserRequest {
+  int64 id = 1;
+}
+
+
+message UpdateUserRequest {
+  int64 id = 1;
+  google.protobuf.StringValue username = 2;
+  google.protobuf.StringValue bio = 3;
+  google.protobuf.StringValue avatar_url = 4;
+  google.protobuf.StringValue channel_id = 5;
+  google.protobuf.StringValue display_name = 6;
+  google.protobuf.BoolValue is_active = 8;
+}
+
+// Request to delete a user
+message DeleteUserRequest {
+  int64 id = 1;
+}
+
+// Request to list users with pagination
+message ListUsersRequest {
+  int32 page = 1;
+  int32 size = 2;
+}
+
+// Response containing a list of users
+message ListUsersResponse {
+  repeated User users = 1;
+  int32 total_pages = 2;
+  int64 total_elements = 3;
+}
+
+// Request to search for users
+message SearchUsersRequest {
+  string query = 1;
+  int32 page = 2;
+  int32 size = 3;
+}
+
+// Request to check if username exists
+message CheckUsernameRequest {
+  string username = 1;
+}
+
+// Response for checking username
+message CheckUsernameResponse {
+  bool exists = 1;
+}
+
+// Request to batch get users by IDs
+message BatchGetUsersRequest {
+  repeated int64 ids = 1;
+}
+
+// The User service definition
+service UserService {
+  // Get a user by ID
+  rpc GetUser(GetUserRequest) returns (User);
+  
+  // Get a user by username
+  rpc GetUserByUsername(GetUserByUsernameRequest) returns (User);
+  
+  // Update an existing user
+  rpc UpdateUser(UpdateUserRequest) returns (User);
+  
+  // Delete a user
+  rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty);
+  
+  // List users with pagination
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+  
+  // Search for users
+  rpc SearchUsers(SearchUsersRequest) returns (ListUsersResponse);
+  
+  // Check if a username already exists
+  rpc CheckUsernameExists(CheckUsernameRequest) returns (CheckUsernameResponse);
+
+  // deactivate user
+  rpc DeactivateUser(deactivateUserRequest) returns (google.protobuf.Empty);
+}

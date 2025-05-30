@@ -1,9 +1,8 @@
-package inpt.aseds.userservice.model;
+package inpt.aseds.userservice.domain.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.Date;
 
 @Entity
@@ -15,7 +14,7 @@ public class Channel {
     private String id;
 
     @Column(name = "owner_id")
-    private String ownerId; // References Keycloak ID
+    private String ownerId;
 
     @Column(name = "channel_name", unique = true)
     private String channelName;
@@ -35,9 +34,6 @@ public class Channel {
 
     @Column(name = "is_live")
     private boolean isLive = false;
-
-    @Column(name = "is_verified")
-    private boolean isVerified = false;
 
     @PrePersist
     protected void onCreate() {
