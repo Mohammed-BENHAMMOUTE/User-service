@@ -16,6 +16,7 @@ message User {
   int64 id = 1;
   string username = 2;
   string bio = 3;
+ string email = 6;
   string avatar_url = 4;
   string channel_id = 5;
   google.protobuf.Timestamp created_at = 7;
@@ -45,6 +46,7 @@ message UpdateUserRequest {
   google.protobuf.StringValue avatar_url = 4;
   google.protobuf.StringValue channel_id = 5;
   google.protobuf.StringValue display_name = 6;
+  google.protobuf.StringValue email = 7;
   google.protobuf.BoolValue is_active = 8;
 }
 
