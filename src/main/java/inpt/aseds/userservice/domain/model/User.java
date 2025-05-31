@@ -4,18 +4,14 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 import java.util.Date;
 
-
-
 @Entity
 @Table(name = "user_table")
-@Getter @Setter
 public class User{
    @Id
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "Username cannot be blank")
@@ -60,5 +56,78 @@ public class User{
     @PreUpdate
     protected void onUpdate() {
         updatedAt = new Date();
+    }
+    
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public String getUsername() {
+        return username;
+    }
+    
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    public String getBio() {
+        return bio;
+    }
+    
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+    
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+    
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+    
+    public String getChannelId() {
+        return channelId;
+    }
+    
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+    
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+    
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+    
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+    
+    public boolean isActive() {
+        return isActive;
+    }
+    
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
     }
 }
